@@ -1,6 +1,7 @@
 package com.besho.java.jpa_hibernate_advanced_mapping;
 
 import com.besho.java.jpa_hibernate_advanced_mapping.dao.AppDAO;
+import com.besho.java.jpa_hibernate_advanced_mapping.entity.Course;
 import com.besho.java.jpa_hibernate_advanced_mapping.entity.Instructor;
 import com.besho.java.jpa_hibernate_advanced_mapping.entity.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -22,9 +23,36 @@ public class JpaHibernateAdvancedMappingApplication {
 			/*getInstructor(appDAO);*/
 			/*deleteInstructor(appDAO);*/
 			/*getInstructorDetail(appDAO);*/
-			deleteInstructorDetail(appDAO);
+			/*deleteInstructorDetail(appDAO);*/
+			createInstructorWithCourses(appDAO);
 
 	};
+	}
+
+	private void createInstructorWithCourses(AppDAO appDAO) {
+		Instructor tempInstructor = new Instructor("Mariana","Emad","mariana@gmail.com");
+
+		InstructorDetail tempInstuctorDetail =
+				new InstructorDetail("http://www.mariana.com/youtube","Swimming");
+
+		// associate the objects
+		tempInstructor.setInstructorDetail(tempInstuctorDetail);
+
+		// create some courses
+		Course	tempCourse1 = new Course("Air Guitar - The Ultimate Guid");
+		Course	tempCourse2 = new Course("Portuguese - For Beginners");
+		/*Course	tempCourse3 = new Course("The Ultimate DevOps Bootcamp");
+		Course	tempCourse4 = new Course("The Complete JavaScript Course 2024");
+		Course	tempCourse5 = new Course("Spring Boot 3, Spring 6 & Hibernate for Beginners");*/
+
+		// save the instrructor
+		// NOTE: this will Also save the courses because of Cascade Type.PRESIST
+tempInstructor.addCourse(tempCourse1);
+tempInstructor.addCourse(tempCourse2);
+
+		System.out.println("Saving the instructor :" + tempInstructor);
+		System.out.println("Saving the instructor :" + tempInstructor.getCourses());
+		appDAO.save(tempInstructor);
 	}
 
 	private void deleteInstructorDetail(AppDAO appDAO) {
@@ -32,6 +60,7 @@ public class JpaHibernateAdvancedMappingApplication {
 		System.out.println("Be Ready We Are Deleting the IbnstructorDetail with Id : "  + theId);
 		InstructorDetail tempInstructorDetail = appDAO.deleteInstructorDetail(theId);
 		System.out.println(tempInstructorDetail);
+		System.out.println("DONE DONE DONE DONE DONE DONE DONE");
 	}
 
 	private void getInstructorDetail(AppDAO appDAO) {
