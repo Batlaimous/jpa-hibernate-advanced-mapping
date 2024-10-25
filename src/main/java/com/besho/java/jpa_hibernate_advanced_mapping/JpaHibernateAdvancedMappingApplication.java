@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class JpaHibernateAdvancedMappingApplication {
 
@@ -24,31 +26,70 @@ public class JpaHibernateAdvancedMappingApplication {
 			/*deleteInstructor(appDAO);*/
 			/*getInstructorDetail(appDAO);*/
 			/*deleteInstructorDetail(appDAO);*/
-			createInstructorWithCourses(appDAO);
+			/*createInstructorWithCourses(appDAO);*/
+			/*findInstructorWithCourses(appDAO);*/
+			/*findCoursesForInstructor(appDAO);*/
+			findInstructorJoinFetch(appDAO);
+
+			
 
 	};
 	}
 
+	private void findInstructorJoinFetch(AppDAO appDAO) {
+		int theId = 2;
+		System.out.println("Finding instructor with id " + theId);
+		Instructor tempInstructorJoin = appDAO.findInstructorByIdJoinFetch(theId);
+		System.out.println(tempInstructorJoin);
+		System.out.println("The Courses for " + tempInstructorJoin.getFirstName() + " are as following " + tempInstructorJoin.getCourses());
+		System.out.println("DONE DONE DONE DONE DONE DONE ya sextooouuuuuuuu");
+	}
+
+	private void findCoursesForInstructor(AppDAO appDAO) {
+		int theId = 3;
+		System.out.println("Finding Instructor id: " + theId);
+		Instructor tempInstructor = appDAO.getInstructor(theId);
+		System.out.println( " the Instructor "+ tempInstructor);
+		// find courses for instructor
+		System.out.println("Finding courses for uinstructor Id:   " + theId);
+		List<Course> courses = appDAO.findCoursesByInstructorId(theId);
+		tempInstructor.setCourses(courses);
+
+		System.out.println( " the courses: "+ tempInstructor.getCourses());
+	}
+
+	private void findInstructorWithCourses(AppDAO appDAO) {
+		int theId = 3;
+		System.out.println("Instructor id: " + theId);
+
+		Instructor tempInstructor = appDAO.getInstructor(theId);
+
+		System.out.println(tempInstructor);
+		System.out.println(tempInstructor.getCourses());
+		System.out.println("DONE DONE");
+	}
+
 	private void createInstructorWithCourses(AppDAO appDAO) {
-		Instructor tempInstructor = new Instructor("Mariana","Emad","mariana@gmail.com");
+		Instructor tempInstructor = new Instructor("batlaimous","King","batlaimous@gmail.com");
 
 		InstructorDetail tempInstuctorDetail =
-				new InstructorDetail("http://www.mariana.com/youtube","Swimming");
+				new InstructorDetail("http://www.kingofjava.com/youtube","Cooooding");
 
 		// associate the objects
 		tempInstructor.setInstructorDetail(tempInstuctorDetail);
 
 		// create some courses
-		Course	tempCourse1 = new Course("Air Guitar - The Ultimate Guid");
-		Course	tempCourse2 = new Course("Portuguese - For Beginners");
-		/*Course	tempCourse3 = new Course("The Ultimate DevOps Bootcamp");
+		/*Course	tempCourse1 = new Course("Air Guitar - The Ultimate Guid");
+		Course	tempCourse2 = new Course("Portuguese - For Beginners");*/
+		Course	tempCourse3 = new Course("The Ultimate DevOps Bootcamp");
 		Course	tempCourse4 = new Course("The Complete JavaScript Course 2024");
-		Course	tempCourse5 = new Course("Spring Boot 3, Spring 6 & Hibernate for Beginners");*/
+		Course	tempCourse5 = new Course("Spring Boot 3, Spring 6 & Hibernate for Beginners");
 
 		// save the instrructor
 		// NOTE: this will Also save the courses because of Cascade Type.PRESIST
-tempInstructor.addCourse(tempCourse1);
-tempInstructor.addCourse(tempCourse2);
+tempInstructor.addCourse(tempCourse3);
+tempInstructor.addCourse(tempCourse4);
+		tempInstructor.addCourse(tempCourse5);
 
 		System.out.println("Saving the instructor :" + tempInstructor);
 		System.out.println("Saving the instructor :" + tempInstructor.getCourses());
