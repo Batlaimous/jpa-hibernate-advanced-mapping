@@ -18,10 +18,19 @@ public class JpaHibernateAdvancedMappingApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 		return runner -> {
-				/* createInstructor(appDAO);*/
+				/*createInstructor(appDAO);*/
 			/*getInstructor(appDAO);*/
-			deleteInstructor(appDAO);
+			/*deleteInstructor(appDAO);*/
+			getInstructorDetail(appDAO);
 	};
+	}
+
+	private void getInstructorDetail(AppDAO appDAO) {
+		int theId = 2;
+		System.out.println("finding the instructorDetail where ID = " + theId);
+		InstructorDetail tempInstructorDetail = appDAO.getInstructorDetail(theId);
+		System.out.println( "tempinstructorDetail is " +tempInstructorDetail);
+		System.out.println("the Associated instructor : " + tempInstructorDetail.getInstructor());
 	}
 
 	private void deleteInstructor(AppDAO appDAO) {
