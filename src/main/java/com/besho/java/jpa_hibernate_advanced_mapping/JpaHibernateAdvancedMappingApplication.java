@@ -21,8 +21,17 @@ public class JpaHibernateAdvancedMappingApplication {
 				/*createInstructor(appDAO);*/
 			/*getInstructor(appDAO);*/
 			/*deleteInstructor(appDAO);*/
-			getInstructorDetail(appDAO);
+			/*getInstructorDetail(appDAO);*/
+			deleteInstructorDetail(appDAO);
+
 	};
+	}
+
+	private void deleteInstructorDetail(AppDAO appDAO) {
+		int theId = 2;
+		System.out.println("Be Ready We Are Deleting the IbnstructorDetail with Id : "  + theId);
+		InstructorDetail tempInstructorDetail = appDAO.deleteInstructorDetail(theId);
+		System.out.println(tempInstructorDetail);
 	}
 
 	private void getInstructorDetail(AppDAO appDAO) {
