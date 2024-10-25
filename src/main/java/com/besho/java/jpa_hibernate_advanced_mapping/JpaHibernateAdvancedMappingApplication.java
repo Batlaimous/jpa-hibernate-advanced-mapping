@@ -29,11 +29,33 @@ public class JpaHibernateAdvancedMappingApplication {
 			/*createInstructorWithCourses(appDAO);*/
 			/*findInstructorWithCourses(appDAO);*/
 			/*findCoursesForInstructor(appDAO);*/
-			findInstructorJoinFetch(appDAO);
+			/*findInstructorJoinFetch(appDAO);*/
+			/*updateInstructor(appDAO);*/
+			updateTheCourse(appDAO);
 
 			
 
 	};
+	}
+
+	private void updateTheCourse(AppDAO appDAO) {
+		int courseId = 12;
+		System.out.println("Finding the Course by id: " + courseId);
+		Course course = appDAO.findCourseById(courseId);
+		System.out.println( "Updating this course: " + course);
+		course.setTitle("Updated Title");
+		appDAO.updateCourse(course);
+		System.out.println( "The New Title For the Course is :  " + course.getTitle());
+	}
+
+	private void updateInstructor(AppDAO appDAO) {
+		int theId = 3;
+		System.out.println("Finding instructor with id " + theId);
+		Instructor instructor = appDAO.getInstructor(theId);
+		System.out.println("Updating ...... the istructor  " + instructor);
+		instructor.setLastName("Test");
+		appDAO.update(instructor);
+		System.out.println("DONE DONE DONE DONE DONE DONE");
 	}
 
 	private void findInstructorJoinFetch(AppDAO appDAO) {
