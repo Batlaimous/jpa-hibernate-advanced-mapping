@@ -28,7 +28,7 @@ public class JpaHibernateAdvancedMappingApplication {
 	}
 
 	private void deleteInstructorDetail(AppDAO appDAO) {
-		int theId = 2;
+		int theId = 3;
 		System.out.println("Be Ready We Are Deleting the IbnstructorDetail with Id : "  + theId);
 		InstructorDetail tempInstructorDetail = appDAO.deleteInstructorDetail(theId);
 		System.out.println(tempInstructorDetail);
@@ -65,10 +65,10 @@ public class JpaHibernateAdvancedMappingApplication {
 				new InstructorDetail("http://www.beshoyounan.com/youtube","i love to code");
 */
 		// create the instructor
-		Instructor tempInstructor = new Instructor("Giovanni","Agusto","giovanni@gmail.com");
+		Instructor tempInstructor = new Instructor("Cecelia","Fernando","cecelia@gmail.com");
 
 		InstructorDetail tempInstuctorDetail =
-				new InstructorDetail("http://www.gigi.com/youtube","sleeping");
+				new InstructorDetail("http://www.cece.com/youtube","playing guitar");
 
 		// associate the objects
 		tempInstructor.setInstructorDetail(tempInstuctorDetail);

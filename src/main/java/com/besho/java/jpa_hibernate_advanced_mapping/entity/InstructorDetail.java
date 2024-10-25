@@ -19,7 +19,8 @@ public class InstructorDetail {
     private String hobby;
 
     // this annotation here and in the instructor class helps to make it Bi-Directional mapping
-    @OneToOne(mappedBy = "instructorDetail", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "instructorDetail", cascade = {CascadeType.DETACH,
+    CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
