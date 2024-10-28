@@ -38,8 +38,31 @@ public class JpaHibernateAdvancedMappingApplication {
 			deleteCourseAndReviews(appDAO);*/
 			/*createCourseAndStudents(appDAO);*/
 			/*findCourseAndStudents(appDAO);*/
-			findStudentAndCourses(appDAO);
+			/*findStudentAndCourses(appDAO);*/
+			addMoreCoursesForStudent(appDAO);
 	};
+	}
+
+	private void addMoreCoursesForStudent(AppDAO appDAO) {
+		int theId = 2;
+		Student theStudent = appDAO.findStudentById(theId);
+
+		// create more courses
+		Course theCourse1 = new Course("Rubik's Cube - How to speed Cube");
+		Course theCourse2 = new Course("How To  - Adnanced Level");
+
+		// add the courses to the student
+		theStudent.addCourse(theCourse1);
+		theStudent.addCourse(theCourse2);
+
+		System.out.println( "Updating the Student ....... " + theStudent);
+		System.out.println("Associated courses " + theStudent.getCourses());
+
+		appDAO.update(theStudent);
+		System.out.println("Yohooooo Done!!!!! ");
+		// save the courses for the student
+
+
 	}
 
 	private void findStudentAndCourses(AppDAO appDAO) {
