@@ -32,14 +32,15 @@ public class JpaHibernateAdvancedMappingApplication {
 			/*updateInstructor(appDAO);*/
 			/*updateTheCourse(appDAO);*/
 			/*deleteTheInstructor(appDAO);*/
-//			deleteTheCourseById(appDAO);
+			deleteTheCourseById(appDAO);
 			//createCourseAndReviews(appDAO);
 			/*findCourseWithReviews(appDAO);
 			deleteCourseAndReviews(appDAO);*/
 			/*createCourseAndStudents(appDAO);*/
 			/*findCourseAndStudents(appDAO);*/
 			/*findStudentAndCourses(appDAO);*/
-			addMoreCoursesForStudent(appDAO);
+			/*addMoreCoursesForStudent(appDAO);*/
+
 	};
 	}
 
@@ -132,7 +133,7 @@ course.addStudent(tempStudent2);
 	}
 
 	private void deleteTheCourseById(AppDAO appDAO) {
-		int courseId = 11;
+		int courseId = 10;
 		System.out.println("Finding the Course by id: " + courseId + "To Delete !!!!!!!!!");
 		appDAO.deleteCourseById(courseId);
 		System.out.println( "The Course Deleted succefully");
