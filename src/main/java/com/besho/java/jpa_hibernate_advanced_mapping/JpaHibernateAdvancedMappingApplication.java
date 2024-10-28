@@ -31,11 +31,24 @@ public class JpaHibernateAdvancedMappingApplication {
 			/*findCoursesForInstructor(appDAO);*/
 			/*findInstructorJoinFetch(appDAO);*/
 			/*updateInstructor(appDAO);*/
-			updateTheCourse(appDAO);
-
-			
-
+			/*updateTheCourse(appDAO);*/
+			/*deleteTheInstructor(appDAO);*/
+			deleteTheCourseById(appDAO);
 	};
+	}
+
+	private void deleteTheCourseById(AppDAO appDAO) {
+		int courseId = 11;
+		System.out.println("Finding the Course by id: " + courseId + "To Delete !!!!!!!!!");
+		appDAO.deleteCourseById(courseId);
+		System.out.println( "The Course Deleted succefully");
+	}
+
+	private void deleteTheInstructor(AppDAO appDAO) {
+		int theId = 3;
+		System.out.println("Finding the Instructor by id: " + theId);
+		appDAO.deleteInstructorById(theId);
+		System.out.println( "The Instructor Deleted succefully");
 	}
 
 	private void updateTheCourse(AppDAO appDAO) {
@@ -76,16 +89,13 @@ public class JpaHibernateAdvancedMappingApplication {
 		System.out.println("Finding courses for uinstructor Id:   " + theId);
 		List<Course> courses = appDAO.findCoursesByInstructorId(theId);
 		tempInstructor.setCourses(courses);
-
 		System.out.println( " the courses: "+ tempInstructor.getCourses());
 	}
 
 	private void findInstructorWithCourses(AppDAO appDAO) {
 		int theId = 3;
 		System.out.println("Instructor id: " + theId);
-
 		Instructor tempInstructor = appDAO.getInstructor(theId);
-
 		System.out.println(tempInstructor);
 		System.out.println(tempInstructor.getCourses());
 		System.out.println("DONE DONE");
@@ -93,26 +103,21 @@ public class JpaHibernateAdvancedMappingApplication {
 
 	private void createInstructorWithCourses(AppDAO appDAO) {
 		Instructor tempInstructor = new Instructor("batlaimous","King","batlaimous@gmail.com");
-
 		InstructorDetail tempInstuctorDetail =
 				new InstructorDetail("http://www.kingofjava.com/youtube","Cooooding");
-
 		// associate the objects
 		tempInstructor.setInstructorDetail(tempInstuctorDetail);
-
 		// create some courses
 		/*Course	tempCourse1 = new Course("Air Guitar - The Ultimate Guid");
 		Course	tempCourse2 = new Course("Portuguese - For Beginners");*/
 		Course	tempCourse3 = new Course("The Ultimate DevOps Bootcamp");
 		Course	tempCourse4 = new Course("The Complete JavaScript Course 2024");
 		Course	tempCourse5 = new Course("Spring Boot 3, Spring 6 & Hibernate for Beginners");
-
 		// save the instrructor
 		// NOTE: this will Also save the courses because of Cascade Type.PRESIST
-tempInstructor.addCourse(tempCourse3);
-tempInstructor.addCourse(tempCourse4);
+		tempInstructor.addCourse(tempCourse3);
+		tempInstructor.addCourse(tempCourse4);
 		tempInstructor.addCourse(tempCourse5);
-
 		System.out.println("Saving the instructor :" + tempInstructor);
 		System.out.println("Saving the instructor :" + tempInstructor.getCourses());
 		appDAO.save(tempInstructor);
@@ -152,26 +157,18 @@ tempInstructor.addCourse(tempCourse4);
 	private void createInstructor(AppDAO appDAO) {
 		/*// create the instructor
 		Instructor tempInstructor = new Instructor("Beshoy","Younan","besho@gmail.com");
-
 		InstructorDetail tempInstuctorDetail =
 				new InstructorDetail("http://www.beshoyounan.com/youtube","i love to code");
 */
 		// create the instructor
 		Instructor tempInstructor = new Instructor("Cecelia","Fernando","cecelia@gmail.com");
-
-		InstructorDetail tempInstuctorDetail =
-				new InstructorDetail("http://www.cece.com/youtube","playing guitar");
-
+		InstructorDetail tempInstuctorDetail = new InstructorDetail("http://www.cece.com/youtube","playing guitar");
 		// associate the objects
 		tempInstructor.setInstructorDetail(tempInstuctorDetail);
-
 		// save the instructor
 		// NOTE: this will Also save the details object because of CascadeType.All annotation
 		System.out.println("Saving instructor" + tempInstructor);
-
 		appDAO.save(tempInstructor);
-
 		System.out.println("doneeee");
 	}
-
 }
