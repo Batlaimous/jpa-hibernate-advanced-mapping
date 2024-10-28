@@ -174,5 +174,12 @@ public class AppDAOImpl implements AppDAO {
         entityManager.merge(theStudent);
     }
 
+    @Override
+    @Transactional
+    public void deleteStudentById(int theId) {
+        Student theStudent = entityManager.find(Student.class, theId);
+        entityManager.remove(theStudent);
+    }
+
 
 }
