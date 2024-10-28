@@ -1,10 +1,7 @@
 package com.besho.java.jpa_hibernate_advanced_mapping;
 
 import com.besho.java.jpa_hibernate_advanced_mapping.dao.AppDAO;
-import com.besho.java.jpa_hibernate_advanced_mapping.entity.Course;
-import com.besho.java.jpa_hibernate_advanced_mapping.entity.Instructor;
-import com.besho.java.jpa_hibernate_advanced_mapping.entity.InstructorDetail;
-import com.besho.java.jpa_hibernate_advanced_mapping.entity.Review;
+import com.besho.java.jpa_hibernate_advanced_mapping.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -37,9 +34,37 @@ public class JpaHibernateAdvancedMappingApplication {
 			/*deleteTheInstructor(appDAO);*/
 //			deleteTheCourseById(appDAO);
 			//createCourseAndReviews(appDAO);
-			findCourseWithReviews(appDAO);
-			deleteCourseAndReviews(appDAO);
+			/*findCourseWithReviews(appDAO);
+			deleteCourseAndReviews(appDAO);*/
+			/*createCourseAndStudents(appDAO);*/
+			findCourseAndStudents(appDAO);
+
 	};
+	}
+
+	private void findCourseAndStudents(AppDAO appDAO) {
+		int courseId = 10;
+		Course course = appDAO.findCourseAndStudentById(courseId);
+		System.out.println( "Loaded Course is below   " + "\n" + course);
+		System.out.println(course.getStudents());
+
+	}
+
+	private void createCourseAndStudents(AppDAO appDAO) {
+		// create a course
+		Course course = new Course("Many-To-Many Relation mapping");
+
+		// create the students
+		Student tempStudent1 = new Student("John","Doe","jdoe@gmail.com");
+		Student tempStudent2 = new Student("Mary","public","mpublic@gmail.com");
+		Student tempStudent3 = new Student("Suzan","mounir","smounir@gmail.com");
+		// add students to the course
+course.addStudent(tempStudent1);
+course.addStudent(tempStudent2);
+		// save the course and students
+		appDAO.save(course);
+		System.out.println(course);
+		System.out.println("Saved Succefully!!!!!!!!!!          ......................");
 	}
 
 	private void deleteCourseAndReviews(AppDAO appDAO) {

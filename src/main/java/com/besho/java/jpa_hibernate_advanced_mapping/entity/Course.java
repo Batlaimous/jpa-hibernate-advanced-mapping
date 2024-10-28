@@ -29,6 +29,18 @@ public class Course {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id")
     private List<Review> reviews;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade ={CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH})
+    @JoinTable(
+            name = "course_student",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
+    private List<Student> students;
     // define constructors
     public Course() {
 
@@ -71,7 +83,6 @@ public class Course {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
-
     // add a convenience method
 
     public void addReview(Review review) {
@@ -80,6 +91,22 @@ public class Course {
         }
         reviews.add(review);
     }
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+    // add a convenience method
+public void addStudent(Student student) {
+        if (this.students == null) {
+            this.students = new ArrayList<>();
+        }
+        students.add(student);
+}
+
+
 
     // define toSrting
     @Override
