@@ -3,6 +3,7 @@ package com.besho.java.jpa_hibernate_advanced_mapping.dao;
 import com.besho.java.jpa_hibernate_advanced_mapping.entity.Course;
 import com.besho.java.jpa_hibernate_advanced_mapping.entity.Instructor;
 import com.besho.java.jpa_hibernate_advanced_mapping.entity.InstructorDetail;
+import com.besho.java.jpa_hibernate_advanced_mapping.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,6 +154,18 @@ public class AppDAOImpl implements AppDAO {
         query.setParameter("data", theId);
         Course course = query.getSingleResult();
         return course;
+    }
+
+    @Override
+    public Student findStudentById(int theId) {
+        TypedQuery<Student> query = entityManager.createQuery(
+                "SELECT i from Student i "
+                + "JOIN FETCH i.courses "
+                + "where i.id = :data", Student.class
+        );
+        query.setParameter("data", theId);
+        Student student = query.getSingleResult();
+        return student;
     }
 
 

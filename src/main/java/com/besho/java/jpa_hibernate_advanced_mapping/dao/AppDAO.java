@@ -3,6 +3,7 @@ package com.besho.java.jpa_hibernate_advanced_mapping.dao;
 import com.besho.java.jpa_hibernate_advanced_mapping.entity.Course;
 import com.besho.java.jpa_hibernate_advanced_mapping.entity.Instructor;
 import com.besho.java.jpa_hibernate_advanced_mapping.entity.InstructorDetail;
+import com.besho.java.jpa_hibernate_advanced_mapping.entity.Student;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public interface AppDAO {
     void save(Course theCourse);
     Course findCourseWithReviewsById(int theId);
     Course findCourseAndStudentById(int theId);
+    Student findStudentById(int theId);
 
 
 }

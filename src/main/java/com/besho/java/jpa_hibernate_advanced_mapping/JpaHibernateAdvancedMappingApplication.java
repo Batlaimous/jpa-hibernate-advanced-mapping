@@ -37,9 +37,16 @@ public class JpaHibernateAdvancedMappingApplication {
 			/*findCourseWithReviews(appDAO);
 			deleteCourseAndReviews(appDAO);*/
 			/*createCourseAndStudents(appDAO);*/
-			findCourseAndStudents(appDAO);
-
+			/*findCourseAndStudents(appDAO);*/
+			findStudentAndCourses(appDAO);
 	};
+	}
+
+	private void findStudentAndCourses(AppDAO appDAO) {
+		int studentId = 1;
+		Student student = appDAO.findStudentById(studentId);
+		System.out.println( "Loaded Student is " + student);
+		System.out.println(student.getCourses());
 	}
 
 	private void findCourseAndStudents(AppDAO appDAO) {
@@ -47,7 +54,6 @@ public class JpaHibernateAdvancedMappingApplication {
 		Course course = appDAO.findCourseAndStudentById(courseId);
 		System.out.println( "Loaded Course is below   " + "\n" + course);
 		System.out.println(course.getStudents());
-
 	}
 
 	private void createCourseAndStudents(AppDAO appDAO) {
